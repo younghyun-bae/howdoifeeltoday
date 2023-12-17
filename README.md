@@ -1,6 +1,12 @@
 # How Do I Feel Today? Ver.2
 
+This is an upgrading version of [one of my old Vanilla JS projects](https://github.com/younghyun-bae/how-do-i-feel-today) with Next.js, React.js, TypeScript, JavaScript, Styled Components, Firebase.
+
 ## 🔍 Project description
+
+Users are able to
+
+- Log in with a Google account and log out
 
 ## 🔨 Note
 
@@ -8,7 +14,7 @@
 
 In an attempt to resolve the issue of logging out when refreshing...
 
-- you need to use `useEffect` to maintain a logged-in state by storing the users' information with [onAuthStateChange()](https://firebase.google.com/docs/auth/web/start#set_an_authentication_state_observer_and_get_user_data)
+- you need to use `useEffect` to maintain a logged-in state by storing the users' information with [onAuthStateChange()](https://firebase.google.com/docs/auth/web/start#set_an_authentication_state_observer_and_get_user_data) from Firebase
 
 ```jsx
 // firebase.js
