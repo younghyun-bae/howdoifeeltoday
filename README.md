@@ -1,6 +1,6 @@
-# How Do I Feel Today? Ver.2
+# 📓 How Do I Feel Today? Ver.2
 
-This is an upgrading version of [one of my old Vanilla JS projects](https://github.com/younghyun-bae/how-do-i-feel-today) with Next.js, React.js, TypeScript, JavaScript, Styled Components, Firebase.
+This is an upgrading version of [one of my old Vanilla JS projects](https://github.com/younghyun-bae/how-do-i-feel-today) with Next.js, React.js, TypeScript, JavaScript, Styled Components, and Firebase
 
 ## 🔍 Project description
 
@@ -14,7 +14,7 @@ Users are able to
 
 In an attempt to resolve the issue of logging out when refreshing...
 
-- you need to use `useEffect` to maintain a logged-in state by storing the users' information with [onAuthStateChange()](https://firebase.google.com/docs/auth/web/start#set_an_authentication_state_observer_and_get_user_data) from Firebase
+- you need to use `useEffect` with [onAuthStateChange()](https://firebase.google.com/docs/auth/web/start#set_an_authentication_state_observer_and_get_user_data) from Firebase to maintain a logged-in state by storing the users' information
 
 ```jsx
 // firebase.js
