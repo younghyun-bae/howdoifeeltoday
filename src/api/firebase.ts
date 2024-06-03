@@ -10,6 +10,7 @@ import {
   TwitterAuthProvider, 
   signOut,
   onAuthStateChanged,
+  User,
 } from "firebase/auth";
 
 import { getDatabase, ref, child, get } from "firebase/database";
@@ -27,7 +28,7 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.envNEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
@@ -44,22 +45,26 @@ const provider = new GoogleAuthProvider();
 
 const database = getDatabase(app);
 
-export function login() {
-  signInWithPopup(auth, provider).catch(console.err);
+interface ExtendedUser extends User {
+  isAdmin?: boolean;
+}
+
+export function login(): void {
+  signInWithPopup(auth, provider).catch(console.error);
 };
 
-export function logout() {
+export function logout(): void {
   signOut(auth).catch(console.error);
 };
 
-export function onUserStateChange(callback) {
+export function onUserStateChange(callback: (user: ExtendedUser | null) => void): void {
   onAuthStateChanged(auth, async (user) => {
     const updatedUser = user ? await adminUser(user) : null;
     callback(updatedUser);
   });
 }
 
-async function adminUser(user) {
+async function adminUser(user: User): Promise<ExtendedUser> {
   return get(ref(database, 'admins'))
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -67,6 +72,6 @@ async function adminUser(user) {
         const isAdmin = admins.includes(user.uid);
         return {...user, isAdmin}
       }
-      return user;
+      return user as ExtendedUser;
     });
 }
