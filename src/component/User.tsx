@@ -1,7 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
 
-export default function User({ user: { photoURL, displayName } }) {
+interface UserProps {
+  user: {
+    photoURL: string;
+    displayName: string;
+  }
+}
+
+export default function User({ user: { photoURL, displayName } }: UserProps) {
   return (
     <div>
       <Image 
